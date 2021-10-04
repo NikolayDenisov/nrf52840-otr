@@ -1,0 +1,5 @@
+Output
+*.pyc
+*.emSession
+venv
+.idea

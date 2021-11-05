@@ -24,7 +24,6 @@ includes.append('../config')
 include_str = config.get("c_user_include_directories", "list")
 for dir_name in include_str.split():
     includes.append(get_rpath(dir_name, sdk_path).replace('\\', '/'))
-includes.append('config')
 c_user_include_directories = ';'.join(includes)
 c_preprocessor_definitions = config.get("c_preprocessor_definitions", "list").replace('\n', ';')[1:]
 with open('template.project') as f:
@@ -46,7 +45,7 @@ for i in range(1, 10):
             except AttributeError as e:
                 pass
         folders[folder_name] = folder_content
-folders['Application'] = ['../main.c', 'config/sdk_config.h']
+folders['Application'] = ['../main.c', '../config/sdk_config.h']
 output = template.render(name=project_name, c_user_include_directories=c_user_include_directories, folders=folders,
                          sdk_path=get_rpath('', sdk_path).replace('\\', '/'),
                          c_preprocessor_definitions=c_preprocessor_definitions)
